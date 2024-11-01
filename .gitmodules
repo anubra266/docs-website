@@ -18,3 +18,4 @@
 	url = https://github.com/gravitational/teleport/
 	branch = master
 	shallow = true
+
