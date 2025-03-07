@@ -7,27 +7,12 @@ import {
 } from "@docusaurus/plugin-content-docs/client";
 import DocCard from "@theme/DocCard";
 import type { Props } from "@theme/DocCardList";
+import type { PropVersionDoc } from "@docusaurus/plugin-content-docs";
+import { categoryHrefToDocID } from "/server/docs-helpers";
 
 function DocCardListForCurrentSidebarCategory({ className }: Props) {
   const category = useCurrentSidebarCategory();
   return <DocCardList items={category.items} className={className} />;
-}
-
-// categoryHrefoToDocID returns the Docusaurus page ID that corresponds to the
-// given href. Category pages do not have IDs in the items prop, so we generate
-// a page ID based on the assumption that category page slugs are the same as
-// their containing directory names.
-function categoryHrefToDocID(href: string): string {
-  if (!href) {
-    return href;
-  }
-  const idPrefix = href.replace(new RegExp(`^/ver/[0-9]+\\.x/`), "");
-  const slugRE = new RegExp(`/([^/]+)/$`);
-  const slug = slugRE.exec(href);
-  if (!slug || slug.length != 2) {
-    return "";
-  }
-  return idPrefix + slug[1];
 }
 
 export default function DocCardList(props: Props): JSX.Element {
@@ -36,7 +21,7 @@ export default function DocCardList(props: Props): JSX.Element {
     return <DocCardListForCurrentSidebarCategory {...props} />;
   }
   const filteredItems = filterDocCardListItems(items).map((item) => {
-    const doc = useDocById(item.docId ?? undefined);
+    const doc = useDocById(item.docId);
 
     if (item.type == "link") {
       return {
