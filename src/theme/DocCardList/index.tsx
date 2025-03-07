@@ -8,7 +8,7 @@ import {
 import DocCard from "@theme/DocCard";
 import type { Props } from "@theme/DocCardList";
 import type { PropVersionDoc } from "@docusaurus/plugin-content-docs";
-import { categoryHrefToDocID } from "/server/docs-helpers";
+import { categoryHrefToDocID } from "./href-to-id";
 
 function DocCardListForCurrentSidebarCategory({ className }: Props) {
   const category = useCurrentSidebarCategory();

@@ -1,5 +1,5 @@
 import { describe, expect, test } from "@jest/globals";
-import { categoryHrefToDocID } from "./docs-helpers";
+import { categoryHrefToDocID } from "./href-to-id";
 
 describe("categoryHrefToDocID", () => {
   interface testCase {
